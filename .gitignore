@@ -6,3 +6,6 @@
 
 # Do not ignore the lock.hcl file
 !**/*.lock.hcl
+
+# Ignore all tfplan files
+**/*.tfplan
