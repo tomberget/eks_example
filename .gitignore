@@ -3,3 +3,6 @@
 
 # Ignore all tfstate
 **/*.tfstate*
+
+# Do not ignore the lock.hcl file
+!**/*.lock.hcl
