@@ -128,10 +128,27 @@ terraform workspace select ${TERRAFORM_ENVIRONMENT}
 terraform plan -var-file=env/${TERRAFORM_ENVIRONMENT}.tfvars
 ```
 
+### Terraform Plan with Out file
+
+The idea behind using an `-out` file, is that the apply will not need to run the the plan section one more time. It can, instead, read and execute upon the saved `.tfplan` file. If you create a `.tfplan` file, please use the `Terraform Apply with Out file` in order to apply changes.
+
+```bash
+terraform plan -var-file=env/${TERRAFORM_ENVIRONMENT}.tfvars -out ${TERRAFORM_ENVIRONMENT}.tfplan
+```
+
 ## Terraform Apply
 
 ```bash
 terraform apply -var-file=env/${TERRAFORM_ENVIRONMENT}.tfvars
+```
+
+### Terraform Apply with Out file
+
+> Only valid if you have created a `.tfplan` file for it to apply.
+> You will NOT be asked to accept the changes when using this.
+
+```bash
+terraform apply ${TERRAFORM_ENVIRONMENT}.tfplan
 ```
 
 ## Kubernetes Credentials
