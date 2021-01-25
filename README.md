@@ -12,9 +12,11 @@ Description of files and directories within this directory.
 | [`env`](./env/) | Holding variable files for environments (test, prod etc) |
 | [`modules`](./modules/) | Holding the local modules created |
 | [`remote-state-create`](./remote-state-create/) | Configuration of S3 bucket with state lock provided by DynamoDB |
+| [`.terraform.lock.hcl`](./.terraform.lock.hcl)     | Terraform version lock file |
 | [`backend.tf`](./backend.tf)     | Configuration of [Terraform state backend][terraform_backend] |
 | [`eks.tf`](./eks.tf)             | Configuration of EKS cluster |
-| [`main.tf`](./main.tf) | Configuration of applications to deploy |
+| [`modules.tf`](./modules.tf) | Configuration of applications to deploy |
+| [`network.tf`](./network.tf) | Configuration of network resources to deploy |
 | [`policies.tf`](./policies.tf) | Configuring the necessary policies to use |
 | [`providers.tf`](./providers.tf) | Configuration of AWS [Terraform providers][terraform_providers] |
 | [`variables.tf`](./variables.tf) | Declaration of top level project variables |
