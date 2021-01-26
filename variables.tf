@@ -11,7 +11,15 @@ variable "cluster_name" {
   type = string
 }
 
-variable "node_count" {
+variable "asg_max_capacity" {
+  type = number
+}
+
+variable "asg_desired_capacity" {
+  type = number
+}
+
+variable "spot_instance_pools" {
   type = number
 }
 

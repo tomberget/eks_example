@@ -31,13 +31,19 @@ module "eks" {
 
   worker_groups = [
     {
-      name                 = "spot-1"
+      name                 = "wg-${local.cluster_name}"
       instance_type        = "t2.small"
-      spot_instance_pools  = var.node_count
-      asg_max_size         = var.node_count + 1
-      asg_desired_capacity = var.node_count
+      root_volume_size     = 20
+      root_volume_type     = "gp2"
+      
+      spot_instance_pools      = var.spot_instance_pools
+      spot_allocation_strategy = "lowest-price"
+      
+      asg_max_size         = var.asg_max_capacity
+      asg_desired_capacity = var.asg_desired_capacity
       kubelet_extra_args   = "--node-labels=node.kubernetes.io/lifecycle=spot"
-      public_ip            = true
+      public_ip            = false
+      # target_group_arns    = # A list of Application LoadBalancer (ALB) target group ARNs to be associated to the autoscaling group
     }
   ]
 }

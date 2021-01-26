@@ -43,7 +43,7 @@ data "aws_availability_zones" "available" {
 
 # Create a subnet to launch our instances into
 resource "aws_subnet" "default" {
-  count = var.node_count
+  count = var.asg_max_capacity
 
   availability_zone = data.aws_availability_zones.available.names[count.index]
   cidr_block        = cidrsubnet(aws_vpc.default.cidr_block, 8, count.index)

@@ -7,6 +7,9 @@ module "external_dns" {
   external_dns_role_name     = var.external_dns_role_name
   account_id                 = data.aws_caller_identity.current.account_id
   txt_owner_id               = var.hostedzone_id
+
+  # Hack to make sure the nodepool is ready before creating
+  aws_nodepool = module.eks.workers_asg_names
 }
 
 module "cert_manager" {
@@ -20,4 +23,7 @@ module "cert_manager" {
   email                      = var.email
   region                     = var.aws_region
   domain_name                = var.domain_name
+
+  # Hack to make sure the nodepool is ready before creating
+  aws_nodepool = module.eks.workers_asg_names
 }
