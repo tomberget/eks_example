@@ -39,3 +39,12 @@ module "cert_manager" {
   region               = var.aws_region
   dns_zone_name        = var.dns_zone_name
 }
+
+module "monitoring" {
+  source = "./modules/monitoring"
+
+  prometheus_operator_chart_version = "13.3.0"
+  prometheus_namespace              = "monitoring"
+
+  ingress_host = var.dns_zone_name
+}
