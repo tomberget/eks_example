@@ -12,9 +12,9 @@ resource "helm_release" "cert_manager" {
   count = var.cert_manager_enabled ? 1 : 0
 
   name       = "cert-manager"
-  repository = "https://charts.jetstack.io"
+  repository = var.repository
   chart      = "cert-manager"
-  version    = var.cert_manager_chart_version
+  version    = var.chart_version
   namespace  = kubernetes_namespace.cert_manager.metadata[0].name
   timeout    = 1200
 

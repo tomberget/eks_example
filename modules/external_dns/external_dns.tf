@@ -12,7 +12,7 @@ resource "helm_release" "external_dns" {
   count = var.external_dns_enabled ? 1 : 0
 
   name       = "external-dns"
-  repository = "https://charts.bitnami.com/bitnami"
+  repository = var.repository
   chart      = "external-dns"
   version    = var.external_dns_chart_version
   namespace  = "external-dns"

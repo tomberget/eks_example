@@ -1,0 +1,35 @@
+# https://github.com/helm/charts/blob/master/stable/nginx-ingress/
+controller:
+  ingressClass: nginx
+  kind: Deployment
+  replicaCount: 1
+  publishService:
+    enabled: true
+
+  service:
+    enabled: true
+    externalTrafficPolicy: Local
+    enableHttp: true
+    enableHttps: true
+    targetPorts:
+      http: 80
+      https: 443
+    ports:
+      http: 80
+      https: 443
+    type: LoadBalancer
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: "${domain_name}"
+
+  metrics:
+    enabled: false
+    service:
+      labels:
+        scrape-by: prometheus-operator
+      annotations:
+        scrape-by: prometheus-operator
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+      additionalLabels:
+        scrape-by: prometheus-operator
