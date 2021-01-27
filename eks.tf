@@ -48,7 +48,7 @@ module "eks" {
       # Set automatic scaling group values
       asg_max_size         = var.asg_max_capacity
       asg_desired_capacity = var.asg_desired_capacity
-      asg_min_size         = var.asg_max_capacity
+      asg_min_size         = var.asg_min_capacity
 
       # Set public IP
       public_ip = true
