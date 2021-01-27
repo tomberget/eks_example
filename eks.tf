@@ -57,4 +57,7 @@ module "eks" {
       target_group_arns = [aws_lb_target_group.this.arn]
     }
   ]
+
+  # Do not write kubeconfig file
+  write_kubeconfig = false
 }
