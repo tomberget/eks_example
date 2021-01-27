@@ -26,12 +26,12 @@ module "eks" {
 
   map_users = [
     {
-    userarn  = var.user_arn
-    username = var.user_name
-    groups   = ["system:masters"]
+      userarn  = var.user_arn
+      username = var.user_name
+      groups   = ["system:masters"]
     },
   ]
-  
+
   tags = {
     createdby   = "terraform",
     environment = var.environment,
@@ -39,22 +39,22 @@ module "eks" {
 
   worker_groups = [
     {
-      name             = "wg"
-      instance_type    = var.instance_type
-      
+      name          = "wg"
+      instance_type = var.instance_type
+
       # Set values for spot instances
-      kubelet_extra_args   = "--node-labels=node.kubernetes.io/lifecycle=spot"
+      kubelet_extra_args = "--node-labels=node.kubernetes.io/lifecycle=spot"
 
       # Set automatic scaling group values
       asg_max_size         = var.asg_max_capacity
       asg_desired_capacity = var.asg_desired_capacity
       asg_min_size         = var.asg_max_capacity
-      
+
       # Set public IP
       public_ip = true
-      
+
       # A list of Application LoadBalancer (ALB) target group ARNs to be associated to the autoscaling group
-      target_group_arns    = [aws_lb_target_group.this.arn]
+      target_group_arns = [aws_lb_target_group.this.arn]
     }
   ]
 }
