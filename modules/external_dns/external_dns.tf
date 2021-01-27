@@ -14,7 +14,7 @@ resource "helm_release" "external_dns" {
   name       = "external-dns"
   repository = var.repository
   chart      = "external-dns"
-  version    = var.external_dns_chart_version
+  version    = var.chart_version
   namespace  = "external-dns"
   timeout    = 600
 
