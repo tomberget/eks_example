@@ -30,7 +30,7 @@ defaultRules:
 
 alertmanager:
   service:
-    type: ClusterIP
+    type: NodePort
   ingress:
     enabled: true
     paths: ["/*"]
@@ -77,7 +77,7 @@ prometheusOperator:
 
 prometheus:
   service:
-    type: ClusterIP
+    type: NodePort
   ingress:
     enabled: true
     paths: ["/*"]
@@ -179,7 +179,7 @@ grafana:
     GF_AUTH_ANONYMOUS_ORG_NAME: ${grafana_org_name}
     GF_AUTH_ANONYMOUS_ORG_ROLE: Editor
   service:
-    type: ClusterIP
+    type: NodePort
   ingress:
     enabled: true
     path: "/*"
