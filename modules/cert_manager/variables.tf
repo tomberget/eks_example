@@ -1,6 +1,7 @@
 variable "repository" {}
 variable "chart_version" {}
 variable "chart_name" {}
+variable "namespace" {}
 variable "cert_manager_enabled" {
   default = true
 }

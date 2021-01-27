@@ -1,6 +1,6 @@
 resource "helm_release" "nginx" {
   name       = "nginx"
-  namespace  = "kube-system"
+  namespace  = var.namespace
   repository = var.repository
   chart      = var.chart_name
   version    = var.chart_version

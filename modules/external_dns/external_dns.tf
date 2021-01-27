@@ -1,10 +1,10 @@
 resource "kubernetes_namespace" "external_dns" {
   metadata {
     annotations = {
-      name = var.external_dns_namespace
+      name = var.namespace
     }
 
-    name = var.external_dns_namespace
+    name = var.namespace
   }
 }
 
@@ -15,7 +15,7 @@ resource "helm_release" "external_dns" {
   repository = var.repository
   chart      = var.chart_name
   version    = var.chart_version
-  namespace  = var.chart_name
+  namespace  = kubernetes_namespace.external_dns.metadata[0].name
   timeout    = 600
 
   values = [

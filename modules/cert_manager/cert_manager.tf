@@ -1,10 +1,10 @@
 resource "kubernetes_namespace" "cert_manager" {
   metadata {
     annotations = {
-      name = var.cert_manager_namespace
+      name = var.namespace
     }
 
-    name = var.cert_manager_namespace
+    name = var.namespace
   }
 }
 
