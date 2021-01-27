@@ -2,7 +2,7 @@ resource "helm_release" "nginx" {
   name       = "nginx"
   namespace  = "kube-system"
   repository = var.repository
-  chart      = "nginx-ingress"
+  chart      = var.chart
   version    = var.chart_version
 
   values = [

@@ -1,6 +1,7 @@
 variable "cluster_id" {}
 variable "chart_version" {}
 variable "repository" {}
+variable "chart_name" {}
 variable "external_dns_enabled" {
   default = true
 }

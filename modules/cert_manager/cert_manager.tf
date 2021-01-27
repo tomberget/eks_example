@@ -11,9 +11,9 @@ resource "kubernetes_namespace" "cert_manager" {
 resource "helm_release" "cert_manager" {
   count = var.cert_manager_enabled ? 1 : 0
 
-  name       = "cert-manager"
+  name       = var.chart_name
   repository = var.repository
-  chart      = "cert-manager"
+  chart      = var.chart_name
   version    = var.chart_version
   namespace  = kubernetes_namespace.cert_manager.metadata[0].name
   timeout    = 1200

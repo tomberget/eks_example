@@ -11,11 +11,11 @@ resource "kubernetes_namespace" "external_dns" {
 resource "helm_release" "external_dns" {
   count = var.external_dns_enabled ? 1 : 0
 
-  name       = "external-dns"
+  name       = var.chart_name
   repository = var.repository
-  chart      = "external-dns"
+  chart      = var.chart_name
   version    = var.chart_version
-  namespace  = "external-dns"
+  namespace  = var.chart_name
   timeout    = 600
 
   values = [
