@@ -19,8 +19,17 @@ variable "asg_desired_capacity" {
   type = number
 }
 
+variable "asg_min_capacity" {
+  type = number
+}
+
 variable "spot_instance_pools" {
   type = number
+}
+
+variable "instance_type" {
+  default     = "t2.small"
+  description = "Type of EC2 instances to use"
 }
 
 variable "cluster_version" {
@@ -44,6 +53,18 @@ variable "email" {
   description = "Email for Lets Encrypt certificates"
 }
 
-variable "domain_name" {
-  description = "Domain name to use"
+variable "dns_zone_name" {
+  description = "DNS zone to use"
+}
+
+variable "dns_record_name" {
+  description = "DNS record to use for the ALB"
+}
+
+variable "user_arn" {
+  description = "User ARN to add to the cluster config map"
+}
+
+variable "user_name" {
+  description = "User name to add to the cluster config map"
 }

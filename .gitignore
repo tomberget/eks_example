@@ -9,3 +9,6 @@
 
 # Ignore all tfplan files
 **/*.tfplan
+
+# Ignore any kubeconfig files
+**/kubeconfig*

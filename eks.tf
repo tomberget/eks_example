@@ -19,11 +19,19 @@ module "eks" {
   version                  = "13.2.1"
   cluster_name             = local.cluster_name
   cluster_version          = var.cluster_version
-  subnets                  = flatten([aws_subnet.default[*].id])
-  vpc_id                   = aws_vpc.default.id
+  subnets                  = flatten([aws_subnet.this.*.id])
+  vpc_id                   = aws_vpc.this.id
   attach_worker_cni_policy = true
   enable_irsa              = true
 
+  map_users = [
+    {
+    userarn  = var.user_arn
+    username = var.user_name
+    groups   = ["system:masters"]
+    },
+  ]
+  
   tags = {
     createdby   = "terraform",
     environment = var.environment,
@@ -31,19 +39,22 @@ module "eks" {
 
   worker_groups = [
     {
-      name                 = "wg-${local.cluster_name}"
-      instance_type        = "t2.small"
-      root_volume_size     = 20
-      root_volume_type     = "gp2"
+      name             = "wg"
+      instance_type    = var.instance_type
       
-      spot_instance_pools      = var.spot_instance_pools
-      spot_allocation_strategy = "lowest-price"
-      
+      # Set values for spot instances
+      kubelet_extra_args   = "--node-labels=node.kubernetes.io/lifecycle=spot"
+
+      # Set automatic scaling group values
       asg_max_size         = var.asg_max_capacity
       asg_desired_capacity = var.asg_desired_capacity
-      kubelet_extra_args   = "--node-labels=node.kubernetes.io/lifecycle=spot"
-      public_ip            = false
-      # target_group_arns    = # A list of Application LoadBalancer (ALB) target group ARNs to be associated to the autoscaling group
+      asg_min_size         = var.asg_max_capacity
+      
+      # Set public IP
+      public_ip = true
+      
+      # A list of Application LoadBalancer (ALB) target group ARNs to be associated to the autoscaling group
+      target_group_arns    = [aws_lb_target_group.this.arn]
     }
   ]
 }

@@ -12,5 +12,4 @@ variable "worker_iam_role_arn" {}
 variable "account_id" {}
 variable "email" {}
 variable "region" {}
-variable "domain_name" {}
-variable "aws_nodepool" {}
+variable "dns_zone_name" {}

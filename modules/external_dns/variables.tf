@@ -11,4 +11,3 @@ variable "txt_owner_id" {}
 variable "external_dns_namespace" {
   default = "external-dns"
 }
-variable "aws_nodepool" {}

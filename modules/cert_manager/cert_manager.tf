@@ -45,7 +45,7 @@ resource "helm_release" "letsencrypt" {
 
   set {
     name  = "acme.dns01.dnsZones"
-    value = var.domain_name
+    value = var.dns_zone_name
   }
 
   set {
