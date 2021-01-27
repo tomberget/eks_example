@@ -3,6 +3,7 @@ module "nginx" {
   repository    = "https://kubernetes.github.io/ingress-nginx"
   chart_name    = "ingress-nginx"
   chart_version = "3.21.0"
+  namespace     = "kube-system"
 
   domain_name = var.dns_zone_name
 }
@@ -12,6 +13,7 @@ module "external_dns" {
   repository    = "https://charts.bitnami.com/bitnami"
   chart_name    = "external-dns"
   chart_version = "4.5.4"
+  namespace     = "external-dns"
 
   cluster_id             = module.eks.cluster_id
   external_dns_id        = "aws"
@@ -26,6 +28,7 @@ module "cert_manager" {
   repository    = "https://charts.jetstack.io"
   chart_name    = "cert-manager"
   chart_version = "v1.1.0"
+  namespace     = "cert-manager"
 
   hostedzone_id        = var.hostedzone_id
   open_id_connect_arn  = module.eks.oidc_provider_arn
