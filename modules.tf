@@ -1,12 +1,12 @@
-module "nginx" {
-  source        = "./modules/nginx"
-  repository    = "https://kubernetes.github.io/ingress-nginx"
-  chart_name    = "ingress-nginx"
-  chart_version = "3.21.0"
-  namespace     = "kube-system"
+# module "nginx" {
+#   source        = "./modules/nginx"
+#   repository    = "https://kubernetes.github.io/ingress-nginx"
+#   chart_name    = "ingress-nginx"
+#   chart_version = "3.21.0"
+#   namespace     = "kube-system"
 
-  domain_name = var.dns_zone_name
-}
+#   domain_name = var.dns_zone_name
+# }
 
 module "external_dns" {
   source        = "./modules/external_dns"
