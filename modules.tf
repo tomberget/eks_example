@@ -5,8 +5,6 @@ module "nginx" {
   chart_version = "3.21.0"
 
   domain_name = var.dns_zone_name
-
-  depends_on = [module.eks.worker_groups]
 }
 
 module "external_dns" {
@@ -21,8 +19,6 @@ module "external_dns" {
   external_dns_role_name = var.external_dns_role_name
   account_id             = data.aws_caller_identity.current.account_id
   txt_owner_id           = var.hostedzone_id
-
-  depends_on = [module.eks.worker_groups]
 }
 
 module "cert_manager" {
@@ -39,6 +35,4 @@ module "cert_manager" {
   email                = var.email
   region               = var.aws_region
   dns_zone_name        = var.dns_zone_name
-
-  depends_on = [module.eks.worker_groups]
 }
