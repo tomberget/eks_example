@@ -1,6 +1,6 @@
 resource "kubernetes_namespace" "prometheus" {
   metadata {
-    name = var.prometheus_namespace
+    name = var.namespace
 
     labels = {
       "istio-injection"    = "disabled"
@@ -36,7 +36,7 @@ resource "helm_release" "prometheus-operator" {
   namespace  = kubernetes_namespace.prometheus.metadata[0].name
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
-  version    = var.prometheus_operator_chart_version
+  version    = var.chart_version
 
   values = [
     data.template_file.prometheus_operator_config.rendered

@@ -43,8 +43,8 @@ module "cert_manager" {
 module "monitoring" {
   source = "./modules/monitoring"
 
-  prometheus_operator_chart_version = "13.3.0"
-  prometheus_namespace              = "monitoring"
+  chart_version = "13.3.0"
+  namespace     = "monitoring"
 
   ingress_host = var.dns_zone_name
 }
