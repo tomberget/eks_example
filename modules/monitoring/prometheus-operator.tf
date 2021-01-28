@@ -9,10 +9,6 @@ resource "kubernetes_namespace" "prometheus" {
   }
 }
 
-data "google_secret_manager_secret_version" "alertmanager_slack_webhook" {
-  secret = "alertmanager-slack-webhook"
-}
-
 data "template_file" "prometheus_operator_config" {
   template = file("${path.root}/modules/monitoring/config.yaml")
   vars = {
