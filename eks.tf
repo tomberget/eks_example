@@ -8,6 +8,10 @@ data "aws_eks_cluster_auth" "cluster" {
 
 data "aws_caller_identity" "current" {}
 
+data "aws_iam_group" "eks_system_masters" {
+  group_name = "EKS_system_masters"
+}
+
 # Create cluster name
 locals {
   cluster_name = "${var.cluster_name}-${var.environment}"
@@ -25,11 +29,11 @@ module "eks" {
   enable_irsa              = true
 
   map_users = [
-    {
-      userarn  = var.user_arn
-      username = var.user_name
+    for user in data.aws_iam_group.eks_system_masters.users : {
+      userarn  = user.arn
+      username = user.user_name
       groups   = ["system:masters"]
-    },
+    }
   ]
 
   tags = {
