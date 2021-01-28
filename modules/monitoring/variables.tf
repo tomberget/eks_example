@@ -1,5 +1,3 @@
-variable "gke_nodepool" {}
-
 variable "ingress_host" {}
 
 variable "istio_enabled" {
