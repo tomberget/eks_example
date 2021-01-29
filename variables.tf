@@ -60,11 +60,3 @@ variable "dns_zone_name" {
 variable "dns_record_name" {
   description = "DNS record to use for the ALB"
 }
-
-variable "user_arn" {
-  description = "User ARN to add to the cluster config map"
-}
-
-variable "user_name" {
-  description = "User name to add to the cluster config map"
-}
